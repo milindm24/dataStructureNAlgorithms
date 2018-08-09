@@ -1,0 +1,109 @@
+function Node(val){
+	this.val = val;
+  this.left = null;
+  this.right = null;
+}
+
+function BinarySearchTree(){
+	this.root = null;
+}
+
+
+BinarySearchTree.prototype.bstToArray = function (){
+
+  var arr = [];
+  
+  arr.push(this.root.val);
+  var makeArray = function recArray(node){
+
+      if(node.right!==null){
+        arr.push(node.right.val);
+        recArray(node.right);
+      }
+      if(node.left != null){
+        arr.push(node.left.val);
+        recArray(node.left);        
+      }
+      return arr;
+    }
+    
+    return makeArray(this.root);
+  }
+
+
+
+BinarySearchTree.prototype.add = function(val){
+	
+  var newNode = new Node(val);
+  var currentNode = this.root;
+  
+  if(currentNode === null){
+  	this.root = newNode;
+  }else {
+  	while(currentNode !== null){
+    	if(currentNode.val < val){
+      if(currentNode.right === null ){
+      	currentNode.right = newNode;
+        break;
+      }
+    	currentNode = currentNode.right;
+    }else {
+    	if(currentNode.left === null){
+    		currentNode.left = newNode;
+        break;
+      }
+      currentNode = currentNode.left;
+    }
+    }
+    }
+  }
+  
+
+BinarySearchTree.prototype.search = function(key){
+
+  if(this.root === null){
+    return false;
+  }
+
+  var currentNode = this.root;
+
+  if(currentNode.val === key){
+  	return true;
+  }else {
+  	while(currentNode !== null){
+    	if(currentNode.val < key){
+       	currentNode = currentNode.right;
+    }else if(currentNode.val > key){
+        currentNode = currentNode.left;
+    }else if(currentNode.val === key){
+      return true;
+    }
+    }
+    }
+
+    return false;
+}
+
+
+
+
+
+
+  
+  var tree = new BinarySearchTree();
+  tree.add(10);
+  tree.add(5);
+  tree.add(20);
+  tree.add(30);
+  tree.add(6);
+  tree.add(60);
+  tree.add(12);
+  tree.add(22);
+  tree.add(204);
+  tree.add(42);
+  tree.add(62);
+  tree.add(32);
+  var arr = tree.bstToArray();
+  console.log(arr);
+  
+  
