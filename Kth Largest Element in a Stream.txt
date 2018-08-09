@@ -1,0 +1,46 @@
+class KthLargest {
+
+    private int k;
+    private int[] nums;
+
+    public KthLargest(int k, int[] nums) {
+        this.k = k;
+        this.nums = nums;
+    }
+
+    public int add(int val) {
+
+        this.nums = Arrays.copyOf(this.nums,this.nums.length +1);
+        nums[nums.length-1] = val;
+        Arrays.sort(nums);
+
+        return nums[this.nums.length - this.k];
+
+
+    }
+}
+
+
+========================================
+
+
+class KthLargest {
+    
+    private PriorityQueue<Integer> pq = new PriorityQueue<>();
+    private int k;
+
+    public KthLargest(int k, int[] nums) {
+        this.k = k;
+        for (int num : nums) {
+            add(num);
+        }
+    }
+    
+    public int add(int val) {
+        pq.offer(val);
+        if (pq.size() > k) {
+            pq.poll();
+        }
+        return pq.peek();
+    }
+}

@@ -1,0 +1,59 @@
+function Node(val){
+	this.val = val;
+	this.next = null;
+}
+
+function LinkedList(){
+  this.length = 0;
+  this.head = null;
+}
+
+
+LinkedList.prototype.add = function(val){
+	
+  var newNode = new Node(val);
+  var currentNode = this.head;
+  
+  if(currentNode === null){
+  this.head = newNode;
+  } else {while(currentNode !== null){
+  	if (currentNode.next === null){
+    	currentNode.next = newNode; 
+      break;
+    } else 
+      currentNode = currentNode.next;
+  }
+  }
+  
+  this.length++;
+}
+
+
+LinkedList.prototype.searchAt = function(index){
+
+var currentNode = this.head;
+
+for(var i=0;i<index;i++){
+	if (index-1 === i){
+  	return currentNode.val;
+  }else {
+  if (currentNode.next === null)
+  		return "node not found"
+    currentNode = currentNode.next;
+  }
+	
+}
+
+return "node not found"
+
+}
+
+
+
+var list = new LinkedList();
+list.add(10);
+list.add(20);
+list.add(30);
+console.log(list.searchAt(4));
+
+
